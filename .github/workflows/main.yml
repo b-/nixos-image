@@ -64,6 +64,10 @@ jobs:
             ext: ova
           - format: vmware
             ext: vmdk
+          - format: proxmox
+            ext: vma
+          - format: proxmox-lxc
+            ext: tar.gz
     name: nixos.${{ matrix.ext }}
     runs-on: ubuntu-latest
     permissions: write-all
