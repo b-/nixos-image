@@ -116,11 +116,11 @@ jobs:
         uses: actions/checkout@v4
       - name: Install Nix
         uses: DeterminateSystems/nix-installer-action@main
-      - name: Set Swap Space
-        uses: pierotofy/set-swap-space@master
-        with:
-          swap-size-gb: 32
-      - uses: mxschmitt/action-tmate@v3
+      # - name: Set Swap Space
+      #   uses: pierotofy/set-swap-space@master
+      #   with:
+      #     swap-size-gb: 32
+      # - uses: mxschmitt/action-tmate@v3
       - name: Build
         run: |
           cp -LR "$(nix build github:b-/system#nixosConfigurations.server@x86_64-linux.config.formats.${{ matrix.format }} --print-out-paths)" '${{ runner.temp }}'
