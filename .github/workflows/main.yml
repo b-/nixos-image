@@ -123,7 +123,7 @@ jobs:
       # - uses: mxschmitt/action-tmate@v3
       - name: Build
         run: |
-          cp -LR "$(nix build github:b-/system#nixosConfigurations.server@x86_64-linux.config.formats.${{ matrix.format }} --print-out-paths)" '${{ runner.temp }}'
+          cp -LR "$(nix build github:b-/system#nixosConfigurations.server@x86_64-linux.config.formats.${{ matrix.format }} --print-out-paths --show-trace --accept-flake-config)" '${{ runner.temp }}'
       - name: Upload
         run: |
           filepath=$(find -L "${{ runner.temp }}" -type f -name '*.${{ matrix.ext }}' | head -n 1)
