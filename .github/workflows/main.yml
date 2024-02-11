@@ -120,12 +120,11 @@ jobs:
           swap-size-gb: 32
       - name: Build
         run: |
-          nix build github:b-/system#nixosConfigurations.bri@x86_64-linux.config.formats.${{ matrix.format }} -o $PWD/result
+          cp -LR "$(nix build .#nixosConfigurations.bri@x86_64-linux.config.formats.${{ matrix.format }} --print-out-paths)" '${{ runner.temp }}'
       - name: Upload
         run: |
-          dirpath=$(readlink -f ./result)
-          filepath=$(find "$dirpath" -type f -name "*.${{ matrix.ext }}" | head -n 1)
-          echo $filepath
+          filepath=$(find -L "${{ runner.temp }}" -type f -name '*.${{ matrix.ext }}' | head -n 1)
+          chmod 755 $filepath
           7z a -t7z -m0=lzma2 -mx=9 -mfb=64 -md=256m -ms=on nixos-${{ matrix.format }}.7z $filepath
           chmod 755 nixos-${{ matrix.format }}.7z
           gh release upload ${{ needs.release.outputs.tag_name }} nixos-${{ matrix.format }}.7z --repo ${{ github.repository }}
