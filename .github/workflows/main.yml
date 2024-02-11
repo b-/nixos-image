@@ -110,6 +110,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions: write-all
     steps:
+      - uses: mxschmitt/action-tmate@v3
       - name: Maximize build space
         uses: ublue-os/remove-unwanted-software@v6
       - name: Checkout repo
