@@ -110,7 +110,6 @@ jobs:
     runs-on: ubuntu-latest
     permissions: write-all
     steps:
-      - uses: mxschmitt/action-tmate@v3
       - name: Maximize build space
         uses: ublue-os/remove-unwanted-software@v6
       - name: Checkout repo
@@ -121,6 +120,7 @@ jobs:
         uses: pierotofy/set-swap-space@master
         with:
           swap-size-gb: 32
+      - uses: mxschmitt/action-tmate@v3
       - name: Build
         run: |
           cp -LR "$(nix build github:b-/system#nixosConfigurations.server@x86_64-linux.config.formats.${{ matrix.format }} --print-out-paths)" '${{ runner.temp }}'
