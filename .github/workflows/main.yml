@@ -120,7 +120,7 @@ jobs:
           swap-size-gb: 32
       - name: Build
         run: |
-          nix build github:b-/system#nixosConfigurations.bri@x86_64-linux.config.formats.${{ matrix.format }} -o $PWD/result
+          nix build github:b-/system#nixosConfigurations.server@x86_64-linux.config.formats.${{ matrix.format }} -o $PWD/result
       - name: Upload
         run: |
           dirpath=$(readlink -f ./result)
