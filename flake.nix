@@ -9,7 +9,7 @@
   outputs = { self, nixpkgs, nixos-generators, ... }: {
     nixosModules.customFormats = {config, lib, ...}: {
       formatConfigs.proxmox = { ... }: {
-        qemuExtraConf = { # naughty restore permissions test
+        proxmox.qemuExtraConf = { # naughty restore permissions test
           hostpci1 = "0000:04:00,pcie=1";
           spice_enhancements = "foldersharing=1,videostreaming=all";
         };
